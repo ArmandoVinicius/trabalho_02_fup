@@ -1,4 +1,5 @@
 # Importação dos módulos usados na aplicação
+from email import header
 import os
 import inquirer
 from tabulate import tabulate
@@ -75,24 +76,26 @@ def index(login):
     clients = read_db()
     for client in clients:
         client = eval(client)
+        index = 0
         if client['login'] == login:
-            print(tabulate([[client['name'], client['login']]], headers=['Nome', 'Login'], tablefmt="rst"))
+            print('********************************************************************************************************************')
+            for key in client:    
+                print(f"{datas[index]}: {client[key]}")
+                index += 1
+                sleep(0.2)
+            print('********************************************************************************************************************')
             return
     print("Cliente não encontrado! Verifique o LOGIN digitado e tente novamente. 😢")
 
 # Função para mostrar os dados de todos os clientes
 def show():
     clients = read_db()
-    
+    nomes = []
     for client in clients:
-        index = 0
         client = eval(client)
-        print('********************************************************************************************************************')
-        for key in client:    
-            print(f"{datas[index]}: {client[key]}")
-            index += 1
-            sleep(0.2)
-    print('********************************************************************************************************************')
+        nomes.append([client['name'], client['login']])
+    print(tabulate([nomes[i] for i in range(len(nomes))], headers=['Nome', 'Login'], tablefmt="rst"))
+    sleep(0.2)
 
 # Função para gerar o relatório dos clientes
 def report():
