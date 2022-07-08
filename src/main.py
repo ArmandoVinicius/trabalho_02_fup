@@ -11,6 +11,7 @@ To-Do list:
     [X] Função de gerar relatório de clientes
     [ ] Resolver caracteres bugados no relatório
     [ ] Testar como o programa executaria no Linux
+    [ ] Adicionar segurança para senha (opcional)
 '''
 
 # Variável global para armazenar as 'chaves' das informações
