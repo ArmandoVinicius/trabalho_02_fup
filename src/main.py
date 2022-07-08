@@ -26,8 +26,25 @@ def clear():
     sleep(2)
     os.system('cls' or 'clear')
 
+# Função para criação dos arquivos essenciais para o funcionamento do programa
+def create_archives():
+    if os.name == 'nt':
+        if not os.path.isfile('src\\clientes_db.txt'):
+            db_client = open('src\\clientes_db.txt', 'w')
+            db_client.close()
+        if not os.path.isfile('src\\relatorio_clientes.txt'):
+            report_client = open('src\\relatorio_clientes.txt', 'w')
+            report_client.close()
+    else:
+        if not os.path.isfile('src/clientes_db.txt'):
+            db_client = open('src/clientes_db.txt', 'w')
+            db_client.close()
+        if not os.path.isfile('src/relatorio_clientes.txt'):
+            report_client = open('src/relatorio_clientes.txt', 'w')
+            report_client.close()
+
 # Função para cadastrar um cliente
-def cadastro():
+def register():
     name = str(input("Digite o NOME COMPLETO do cliente: "))
     login = str(input("Digite o LOGIN do cliente: "))
     
@@ -121,12 +138,7 @@ def report():
 # Loop infinito para mostrar o menu principal
 while True:
     # Criação dos arquivos essenciais para o funcionamento do programa
-    if not os.path.isfile('src\\clientes_db.txt'):
-        db_client = open('src\\clientes_db.txt', 'w')
-        db_client.close()
-    if not os.path.isfile('src\\relatorio_clientes.txt'):
-        report_client = open('src\\relatorio_clientes.txt', 'w')
-        report_client.close()
+    create_archives()
 
     # Mostrando o menu principal
     print('************************************************* Randinho Market **************************************************')
@@ -134,7 +146,7 @@ while True:
 
     # Verificando a opção escolhida pelo usuário
     if option == "Cadastrar cliente":
-        cadastro()
+        register()
         sleep(1)
         input("\nPressione ENTER para continuar...")
         clear()
