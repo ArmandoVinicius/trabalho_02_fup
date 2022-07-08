@@ -11,7 +11,7 @@ To-Do list:
     [X] Verificar se o usuário digitou um login já existente
     [X] Função de gerar relatório de clientes
     [ ] Resolver caracteres bugados no relatório
-    [ ] Testar como o programa executaria no Linux
+    [X] Testar como o programa executaria no Linux
     [ ] Adicionar segurança para senha (opcional)
 '''
 
@@ -25,23 +25,6 @@ menu = ["Cadastrar cliente", "Mostrar dados do cliente", "Mostrar clientes cadas
 def clear():
     sleep(2)
     os.system('cls' or 'clear')
-
-# Função para criação dos arquivos essenciais para o funcionamento do programa
-def create_archives():
-    if os.name == 'nt':
-        if not os.path.isfile('src\\clientes_db.txt'):
-            db_client = open('src\\clientes_db.txt', 'w')
-            db_client.close()
-        if not os.path.isfile('src\\relatorio_clientes.txt'):
-            report_client = open('src\\relatorio_clientes.txt', 'w')
-            report_client.close()
-    else:
-        if not os.path.isfile('src/clientes_db.txt'):
-            db_client = open('src/clientes_db.txt', 'w')
-            db_client.close()
-        if not os.path.isfile('src/relatorio_clientes.txt'):
-            report_client = open('src/relatorio_clientes.txt', 'w')
-            report_client.close()
 
 # Função para cadastrar um cliente
 def register():
@@ -74,7 +57,7 @@ def register():
     }
 
     # Armazenando os dados do cliente em um arquivo
-    db_client = open('src\clientes_db.txt', 'a')
+    db_client = open('clientes_db.txt', 'a')
     db_client.write(str(client_model) + '\n')
     db_client.close()
 
@@ -83,7 +66,7 @@ def register():
 
 # Função para ler o arquivo de clientes
 def read_db():
-    db_client = open('src\clientes_db.txt', 'r')
+    db_client = open('clientes_db.txt', 'r')
     clients = db_client.readlines()
     db_client.close()
     return clients
@@ -123,7 +106,7 @@ def report():
     year = fullDate.year
     clients = read_db()
     
-    report_client = open('src\\relatorio_clientes.txt', 'w')
+    report_client = open('relatorio_clientes.txt', 'w')
     report_client.write(f'Relatório de clientes\n\nA loja Randinho Market possui {len(clients)} clientes que estão listados abaixo:\n\n')
     
     for client in clients:
@@ -138,7 +121,12 @@ def report():
 # Loop infinito para mostrar o menu principal
 while True:
     # Criação dos arquivos essenciais para o funcionamento do programa
-    create_archives()
+    if not os.path.isfile('clientes_db.txt'):
+        db_client = open('clientes_db.txt', 'w')
+        db_client.close()
+    if not os.path.isfile('relatorio_clientes.txt'):
+        report_client = open('relatorio_clientes.txt', 'w')
+        report_client.close()
 
     # Mostrando o menu principal
     print('************************************************* Randinho Market **************************************************')
