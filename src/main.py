@@ -24,7 +24,7 @@ menu = ["Cadastrar cliente", "Mostrar dados do cliente", "Mostrar clientes cadas
 # Função para limpar o terminal
 def clear():
     sleep(2)
-    os.system('cls')
+    os.system('cls' or 'clear')
 
 # Função para cadastrar um cliente
 def cadastro():
